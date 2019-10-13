@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PwdCreatorApp</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="linker/createPwd.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-12">
+          <h1>Para crear contraseñas selecciona de las siguiente opciones</h1>
+        </div>
+        
+        <div class="row">
+          <div class="col-12">
+            <form>
+              <div class="form-group row">
+                <label for="inputPwdLength" class="col-sm-2 col-form-label">Longitud de constraseña:</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="inputPwdLength" placeholder="8">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">Con Phonetica:</div>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                    <label class="form-check-label" for="gridCheck1">
+                      (Alpha-Bravo-Charlie-...)
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">Con Letras Minúsculas:</div>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck2">
+                    <label class="form-check-label" for="gridCheck3">
+                      (abcdef...)
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">Con Letras Mayúsculas:</div>
+                <div class="col-sm-10"
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck3">
+                    <label class="form-check-label" for="gridCheck3">
+                      (ABCDEF...)
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">Con Dígitos:</div>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck4">
+                    <label class="form-check-label" for="gridCheck4">
+                      (0123456789)
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">Con Caracteres Especiales:</div>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck5">
+                    <label class="form-check-label" for="gridCheck5">
+                      (!@#$%&/()=*+?.,)
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">Sin Repetición:</div>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck6">
+                    <label class="form-check-label" for="gridCheck6">
+                      (No hay caracteres repetidos)
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="numPwd" class="col-sm-2 col-form-label">Cantidad: </label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="numPwd" placeholder="8">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-5">
+                  <button type="submit" class="btn btn-outline-success" onclick="get_pwdOptions()">Generar Contraseña(s)</button>
+                </div>
+                <div class="col-sm-5">
+                  <button type="reset" class="btn btn-outline-dark" onclick="reset_Options">Resetear Opciones</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+    </div>
+    
+    
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>

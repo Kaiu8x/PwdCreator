@@ -1,0 +1,22 @@
+{
+  "name": "securityapp",
+  "version": "1.0.0",
+  "description": "A password creator app using python and electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "Kaiu8x",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^6.0.12"
+  }
+}

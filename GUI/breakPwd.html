@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PwdCreatorApp</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="linker/breakPwd.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-12">
+          <h1>Para decifrar la contraseña ingrese lo siguiente:</h1>
+        </div>
+        
+        <div class="row">
+          <div class="col-12">
+            <form>
+              <div class="form-group row">
+                <label for="inputPwdLength2" class="col-sm-2 col-form-label">Longitud de constraseña:</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="inputPwdLength2" placeholder="8">
+                </div>
+              </div>
+              <fieldset class="form-group">
+                <div class="row">
+                  <legend class="col-form-label col-sm-2 pt-0">Usando combinaciones de: </legend>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="0">
+                      <label class="form-check-label" for="gridRadios1">
+                        Solo vocales minúsculas (aeiou)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="1">
+                      <label class="form-check-label" for="gridRadios2">
+                        Solo vocales mayúsculas (AEIOU)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="2" checked>
+                      <label class="form-check-label" for="gridRadios3">
+                        Solo vocales minúsculasús y mayúsculas (aeiouAEIOU)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="3">
+                      <label class="form-check-label" for="gridRadios4">
+                        Solo dígitos (0123456789)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="4">
+                      <label class="form-check-label" for="gridRadios5">
+                        Solo letras minúsculas (abcdef...)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios6" value="5">
+                      <label class="form-check-label" for="gridRadios6">
+                        Solo letras mayúsculas (ABCDEF...)
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="form-group row">
+                <label for="MD5Hash" class="col-sm-2 col-form-label">Hash MD5: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="MD5Hash" placeholder="99ca16537d3b9bf6153ec86db8f87d13">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="SHA1Hash" class="col-sm-2 col-form-label">Hash SHA-1: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="SHA1Hash" placeholder="ad466ed3e7397b8de8148efecf78de39a3a76931">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-5">
+                  <button type="submit" class="btn btn-outline-success" id="breakPass" onclick="break_pwd()">Comenzar a decifrar</button>
+                </div>
+                <div class="col-sm-5">
+                  <button type="reset" class="btn btn-outline-dark" onclick="reset_Options2()">Resetear Opciones</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+    </div>
+    
+    
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>
