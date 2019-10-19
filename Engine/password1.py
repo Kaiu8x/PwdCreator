@@ -12,7 +12,7 @@ fullCmdArguments = sys.argv
 list_options = fullCmdArguments[1:]
 
 using_set = []
-print(list_options)
+#print(list_options)
 pass_length = int(list_options[0])
 is_phonetic = list_options[1]
 no_repetition = list_options[6]
@@ -27,8 +27,8 @@ if list_options[4] in true_list:
 if list_options[5] in true_list:
 	using_set.extend(special_character_set)
 
-print("Length: ", pass_length, " Phonetic: ", is_phonetic, "lower: ", list_options[2], " upper: ", list_options[3], " digit: ", list_options[4], " special char: ", list_options[5], " no_repetition: ", no_repetition, " num_pass: ", num_pass)
-print("Using set: ", using_set)
+#print("Length: ", pass_length, " Phonetic: ", is_phonetic, "lower: ", list_options[2], " upper: ", list_options[3], " digit: ", list_options[4], " special char: ", list_options[5], " no_repetition: ", no_repetition, " num_pass: ", num_pass)
+#print("Using set: ", using_set)
 
 for k in range(num_pass):
 	pwd_list = []

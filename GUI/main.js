@@ -7,6 +7,10 @@ require('electron-reload')(__dirname)
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+let showBreakWindow
+
+let showPwdWindow
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -32,6 +36,42 @@ function createWindow () {
     mainWindow = null
   })
 }
+
+function createShowPwdWindow() {
+  showPwdWindow = new BrowserWindow({
+    width: 1000,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+    }
+  })
+  
+  showPwdWindow.loadFile('showCreatePwd.html')
+
+  showPwdWindow.on('closed', function () {
+    mainWindow = null
+  })
+
+}
+
+function createBreakPwdWindow() {
+  showBreakWindow = new BrowserWindow({
+    width: 1000,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+    }
+  })
+
+  showBreakWindow.loadFile('showBrokePwd.html')
+
+  showBreakWindow.on('closed', function () {
+    mainWindow = null
+  })
+}
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

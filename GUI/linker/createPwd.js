@@ -1,3 +1,42 @@
+const { ipcRenderer } = require('electron');
+const { ipcMain } = require('electron');
+const { BrowserWindow } = require('electron').remote;
+
+function createShowPwdWindow(payload) {
+  showPwdWindow = new BrowserWindow({
+    width: 1000,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+    }
+  })
+  
+  showPwdWindow.on('did-finish-load', () => {
+    console.log("second window loaded");
+  showPwdWindow.webContents.send('send-data', payload);
+  showPwdWindow.webContents.send('send-hello', "Hello from first window!!!");
+  console.log("Message send");
+  });
+
+  showPwdWindow.on('dom-ready', () => {
+    console.log("second window loaded");
+  showPwdWindow.webContents.send('send-data', payload);
+  showPwdWindow.webContents.send('send-hello', "Hello from first window!!!");
+  console.log("Message send");
+  });
+
+  showPwdWindow.on('closed', function () {
+    showPwdWindow = null
+  })
+
+  showPwdWindow.loadFile('showCreatePwd.html')
+  
+  showPwdWindow.webContents.openDevTools()
+
+  console.log("WTF!")
+
+}
+
 function get_pwdOptions() {
 	var {PythonShell} = require("python-shell")
 	var path = require("path")
@@ -33,13 +72,16 @@ function get_pwdOptions() {
 		args : [pwdLength,phonetic,lowerCase,upperCase,digits,specialCharacters,noRepetition, numPwd]
 	}
 	
-	console.log(options.args);
+	//console.log(options.args);
 	
 
 	var passwords = new PythonShell('password1.py', options);
 
 	passwords.on('message', function(message) {
-		console.log(message)
+		//console.log(message)
+		if (message != "No es possible generar la contrasena") {
+			createShowPwdWindow(message)
+		}
 		//swal(message);
 		//create window with answares
 	})

@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <title>PwdCreatorApp</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="linker/createPwd.js"></script>
+    
+   <script>
+    const ipcRenderer = require('electron').ipcRenderer;
+    ipcRenderer.on('send-data', (event, payload) => {
+        console.log("ENTERED");
+        console.log(payload);
+    });
+    ipcRenderer.on('send-hello', (event, msg) => {
+        console.log(msg);
+    });
+   </script>
   </head>
   <body>
     <div class="container">
       <div class="row align-items-center justify-content-center">
         <div class="col-12">
           <h1>Las contraseñas creadas son: </h1>
+        </div>
+        <div class="col-12" id="listPwd">
+
         </div>
     </div>
     
