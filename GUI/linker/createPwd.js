@@ -1,28 +1,21 @@
 const { ipcRenderer } = require('electron');
 const { ipcMain } = require('electron');
 const { BrowserWindow } = require('electron').remote;
+const path = require('path');
 
 function createShowPwdWindow(payload) {
   showPwdWindow = new BrowserWindow({
     width: 1000,
     height: 600,
+    icon:path.join(__dirname, '../assets/lock_icon.jpg'),
     webPreferences: {
       nodeIntegration: true,
     }
   })
   
-  showPwdWindow.on('did-finish-load', () => {
-    console.log("second window loaded");
-  showPwdWindow.webContents.send('send-data', payload);
-  showPwdWindow.webContents.send('send-hello', "Hello from first window!!!");
-  console.log("Message send");
-  });
-
-  showPwdWindow.on('dom-ready', () => {
-    console.log("second window loaded");
-  showPwdWindow.webContents.send('send-data', payload);
-  showPwdWindow.webContents.send('send-hello', "Hello from first window!!!");
-  console.log("Message send");
+  showPwdWindow.webContents.on('dom-ready', () => {
+	showPwdWindow.webContents.send('send-data', payload);
+	//console.log("Message send");
   });
 
   showPwdWindow.on('closed', function () {
@@ -31,16 +24,18 @@ function createShowPwdWindow(payload) {
 
   showPwdWindow.loadFile('showCreatePwd.html')
   
-  showPwdWindow.webContents.openDevTools()
+  //showPwdWindow.webContents.openDevTools()
 
-  console.log("WTF!")
+}
 
+function close_alert() {
+	document.getElementById('alertID').hidden = true;
 }
 
 function get_pwdOptions() {
 	var {PythonShell} = require("python-shell")
 	var path = require("path")
-
+	var flag = true;
 	var pwdLength = document.getElementById("inputPwdLength").value
 	//document.getElementById("inputPwdLength").value = "" ;
 
@@ -65,10 +60,18 @@ function get_pwdOptions() {
 	var numPwd = document.getElementById("numPwd").value;
 	//document.getElementById("numPwd").value = "" ;
 
-	
+	if (pwdLength == "" || numPwd == "") {
+		document.getElementById("alert").innerHTML = "<div class='alert alert-warning alert-dismissible fade show' role='alert' id='alertID'> <strong>Alert! </strong> No puede dejar en blanco la longitud y el numero de contraseñas. <button type='button' class='close' data-dismiss='alert' aria-label='Close' onclick='close_alert()'> <span aria-hidden='true'>&times;</span> </button></div>"
+		flag = false;
+	}
+
+	if(lowerCase == false && upperCase == false && digits == false && specialCharacters == false) {
+		document.getElementById("alert").innerHTML = "<div class='alert alert-warning alert-dismissible fade show' role='alert' id='alertID'> <strong>Alert! </strong> Tiene que seleccionar una de las opciones para crear contraseña <button type='button' class='close' data-dismiss='alert' aria-label='Close' onclick='close_alert()'> <span aria-hidden='true'>&times;</span> </button></div>"	
+		flag = false;
+	}
 
 	var options = {
-		scriptPath: path.join(__dirname, '/../Engine/'),
+		scriptPath: path.join(__dirname, '/Engine/'),
 		args : [pwdLength,phonetic,lowerCase,upperCase,digits,specialCharacters,noRepetition, numPwd]
 	}
 	
@@ -79,8 +82,12 @@ function get_pwdOptions() {
 
 	passwords.on('message', function(message) {
 		//console.log(message)
-		if (message != "No es possible generar la contrasena") {
+		if (flag && message != "No es possible generar la contrasena") {
 			createShowPwdWindow(message)
+			passwords.terminate()
+		} else {
+			document.getElementById("alert").innerHTML = "<div class='alert alert-warning alert-dismissible fade show' role='alert' id='alertID'> <strong>Holy guacamole!</strong> No se pudo crear las contraseñas con estas restricciones. Esocoge otras <button type='button' class='close' data-dismiss='alert' aria-label='Close' onclick='close_alert()'> <span aria-hidden='true'>&times;</span> </button></div>"
+			passwords.terminate()
 		}
 		//swal(message);
 		//create window with answares
