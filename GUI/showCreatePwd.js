@@ -21,11 +21,14 @@ function listItems(itemList) {
 	var pwdlist = JSON.parse(itemList);
 	console.log(pwdlist);
 	var length = pwdlist.length;
-	for (var i = 0; i<length; i+=3) {
-		str += "<div class='card'> <h5 class='card-title'>Password "+((i/3)+1) +":</h5> <ul class='list-group list-group-flush'>";
+	for (var i = 0; i<length; i+=4) {
+		str += "<div class='card'> <h5 class='card-title'>Password "+((i/4)+1) +":</h5> <ul class='list-group list-group-flush'>";
 		str += "<li class='list-group-item'> Password: "+pwdlist[i]+"</li>";
-		str += "<li class='list-group-item'> MD5: "+pwdlist[i+1]+"</li>";
-		str += "<li class='list-group-item'> SHA-1: "+pwdlist[i+2]+"</li>";
+		if(pwdlist[i+1]!= '') {
+			str += "<li class='list-group-item'> Phonetic: "+pwdlist[i+1]+"</li>";
+		}
+		str += "<li class='list-group-item'> MD5: "+pwdlist[i+2]+"</li>";
+		str += "<li class='list-group-item'> SHA-1: "+pwdlist[i+3]+"</li>";
 		str += "</ul></div>";
 	}
 	
