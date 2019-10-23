@@ -29,42 +29,86 @@
                     <input type="number" class="form-control" id="inputPwdLength2" placeholder="8" min="0" value="8" required>
                   </div>
                 </div>
+                <div class="form-group row">
+                  <div class="col-3">Usando combinacion de:</div>
+                  <div class="col-9">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck2" onchange="disableRound()">
+                      <label class="form-check-label" for="gridCheck3">
+                        Letras minúsculas (abcdef...)
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-3"></div>
+                  <div class="col-9">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck3" onchange="disableRound()">
+                      <label class="form-check-label" for="gridCheck3">
+                        Letras mayúsculas (ABCDEF...)
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-3"></div>
+                  <div class="col-9">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck4" onchange="disableRound()">
+                      <label class="form-check-label" for="gridCheck4">
+                        Dígitos (0123456789)
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-3"></div>
+                  <div class="col-9">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck5" onchange="disableRound()">
+                      <label class="form-check-label" for="gridCheck5">
+                        Caracteres Especiales (!@#$%&/()=*+?.,)
+                      </label>
+                    </div>
+                  </div>
+                </div>
                 <fieldset class="form-group">
                   <div class="row">
-                    <legend class="col-form-label col-3 pt-0">Usando combinaciones de: </legend>
+                    <legend class="col-form-label col-3 pt-0">O usando: </legend>
                     <div class="col-9">
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="0">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="0" onchange="disableCheckBox()">
                         <label class="form-check-label" for="gridRadios1">
                           Solo vocales minúsculas (aeiou)
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="1">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="1" onchange="disableCheckBox()">
                         <label class="form-check-label" for="gridRadios2">
                           Solo vocales mayúsculas (AEIOU)
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="2" checked>
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="2" onchange="disableCheckBox()">
                         <label class="form-check-label" for="gridRadios3">
                           Solo vocales minúsculasús y mayúsculas (aeiouAEIOU)
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="3">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="3" onchange="disableCheckBox()">
                         <label class="form-check-label" for="gridRadios4">
                           Solo dígitos (0123456789)
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="4">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="4" onchange="disableCheckBox()" checked>
                         <label class="form-check-label" for="gridRadios5">
                           Solo letras minúsculas (abcdef...)
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios6" value="5">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios6" value="5" onchange="disableCheckBox()">
                         <label class="form-check-label" for="gridRadios6">
                           Solo letras mayúsculas (ABCDEF...)
                         </label>

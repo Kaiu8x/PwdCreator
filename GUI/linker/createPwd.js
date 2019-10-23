@@ -1,13 +1,13 @@
 const { ipcRenderer } = require('electron');
 const { ipcMain } = require('electron');
 const { BrowserWindow } = require('electron').remote;
-const path = require('path');
+const path = require("path");
 
 function createShowPwdWindow(payload) {
   showPwdWindow = new BrowserWindow({
     width: 1000,
     height: 600,
-    icon:path.join(__dirname, '../assets/lock_icon.jpg'),
+    icon:path.join(__dirname, "../assets/lock_icon.jpg"),
     webPreferences: {
       nodeIntegration: true,
     }
@@ -22,14 +22,14 @@ function createShowPwdWindow(payload) {
     showPwdWindow = null
   })
 
-  showPwdWindow.loadFile('showCreatePwd.html')
+  showPwdWindow.loadFile("showCreatePwd.html")
   
   //showPwdWindow.webContents.openDevTools()
 
 }
 
 function close_alert() {
-	document.getElementById('alertID').hidden = true;
+	document.getElementById('alertID').innerHTML = "";
 }
 
 function get_pwdOptions() {
@@ -82,13 +82,17 @@ function get_pwdOptions() {
 
 	passwords.on('message', function(message) {
 		//console.log(message)
+		if(message == 'No es possible generar la contrasena') {
+			document.getElementById("alert").innerHTML = "<div class='alert alert-warning alert-dismissible fade show' role='alert' id='alertID'> <strong>Holy guacamole!</strong> No se pudo crear las contraseñas con estas restricciones. Esocoge otras <button type='button' class='close' data-dismiss='alert' aria-label='Close' onclick='close_alert()'> <span aria-hidden='true'>&times;</span> </button></div>"
+			passwords.terminate()
+			flag = false;
+		}
 		if (flag && message != "No es possible generar la contrasena") {
 			createShowPwdWindow(message)
 			passwords.terminate()
-		} else {
-			document.getElementById("alert").innerHTML = "<div class='alert alert-warning alert-dismissible fade show' role='alert' id='alertID'> <strong>Holy guacamole!</strong> No se pudo crear las contraseñas con estas restricciones. Esocoge otras <button type='button' class='close' data-dismiss='alert' aria-label='Close' onclick='close_alert()'> <span aria-hidden='true'>&times;</span> </button></div>"
-			passwords.terminate()
-		}
+			close_alert()
+		} 
+		
 		//swal(message);
 		//create window with answares
 	})
