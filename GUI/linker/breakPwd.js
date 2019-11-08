@@ -3,7 +3,7 @@ const { ipcMain } = require('electron');
 const { BrowserWindow } = require('electron').remote;
 
 var {PythonShell} = require("python-shell")
-var path = require("path")
+const path = require("path")
 var passwordBreak
 var isCombi = false;
 var ctrlDown = false;
@@ -75,16 +75,17 @@ function createBreakPwdWindow(payload) {
 
   showBreakWindow.loadFile("showBrokePwd.html")
 
-  //showBreakWindow.webContents.openDevTools()
+  showBreakWindow.webContents.openDevTools()
 }
 
 function close_alert() {
-	document.getElementById('"alert2"').innerHTML = "";
+	document.getElementById("alert2").innerHTML = "";
+	document.getElementById("alert2").hidden = true;
 }
 
 function break_pwd() {
-	//console.log("BREAK PWD ENTERED");
-	
+	console.log("BREAK PWD ENTERED");
+	var path = require("path")
 	var flag = true;
 	document.getElementById("stopBreakBtn").disabled = false;
 
@@ -135,15 +136,14 @@ function break_pwd() {
 		document.getElementById("breakPass").innerText = "Decifrando...";
 	}
 
-	//console.log(options2.args);
+	console.log(options2.args);
 
 	passwordBreak = new PythonShell('break_password.py', options2);
 	
 	passwordBreak.on('message', function(message) {
-		//console.log(message);
-		//console.log("Trying to break");
+		console.log(message);
 		if (flag && message != "ERROR") {
-			//console.log(message);
+			console.log("Creating window");
 			document.getElementById("breakPass").innerText = "Comenzar a decifrar"
 			createBreakPwdWindow(message);
 			passwordBreak.terminate();
@@ -165,10 +165,17 @@ function break_pwd() {
 }
 
 function stop_break_pwd() {
-	//console.log("STOP")
+	console.log("SIGINT SENT");
 	document.getElementById("breakPass").innerText = "Comenzar a decifrar";
 	document.getElementById("stopBreakBtn").disabled = true;
-	passwordBreak.terminate('SIGINT');
+	//passwordBreak.send("CTRL_C_EVENT");
+	//passwordBreak.send("^c");
+	//passwordBreak.send("SIGINT");
+	//passwordBreak.send({command: "^c"})
+	passwordBreak.terminate("SIGINT");
+	//passwordBreak.terminate();
+	//passwordBreak.send("Terminate");
+	//passwordBreak.terminate("CTRL_C_EVENT");
 	
 }
 

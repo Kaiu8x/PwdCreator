@@ -24,12 +24,13 @@ function createShowPwdWindow(payload) {
 
   showPwdWindow.loadFile("showCreatePwd.html")
   
-  //showPwdWindow.webContents.openDevTools()
+  showPwdWindow.webContents.openDevTools()
 
 }
 
 function close_alert() {
 	document.getElementById('alertID').innerHTML = "";
+	document.getElementById('alertID').hidden = true;
 }
 
 function get_pwdOptions() {

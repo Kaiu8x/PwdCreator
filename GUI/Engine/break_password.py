@@ -3,9 +3,9 @@ import itertools
 from hashing import *
 import sys
 import time
-from signal import signal, SIGINT
+import signal
 
-
+#line = sys.stdin.readlines()
 
 vocal_set = ['a','i','u','e','o']
 upper_case_vocal_set = ['A','I','U','E','O']
@@ -21,14 +21,28 @@ list_options = fullCmdArguments[1:]
 
 using_set = []
 pass_length = int(list_options[0])
-isCombi = bool(list_options[1])
+isCombi = list_options[1] in true_list
 possible_pwd_list = []
 possible_pwd = ''.join(possible_pwd_list)
 create_pass_list = []
 
 currentPassComb = ''
 
-if isCombi in true_list:
+def handler(signal_received, frame):
+		#print("Signal recieved: "+signal_received)
+		create_pass_list.append("Se Interrumpió la operación")
+		create_pass_list.append(count)
+		create_pass_list.append(currentPassComb)
+		t1 = time.time()
+		total = t1-t0
+		create_pass_list.append(total)
+		print(create_pass_list)
+		sys.exit(0)
+
+signal.signal(signal.SIGINT, handler)
+
+
+if isCombi:
 	if list_options[5] in true_list:
 		using_set.extend(letter_set)
 	if list_options[6] in true_list:
@@ -53,34 +67,17 @@ else:
 		#print("entered 3")
 		using_set.extend(digit_set)
 	if break_option == 4:
-		#print("entered 4")
 		using_set.extend(letter_set)
 	if break_option == 5:
 		#print("entered 5")
 		using_set.extend(upper_case_letter_set)
-	if break_option > 5:
-		print("ERROR")
-	if break_option < 0:
-		print("ERROR")
 count = 0
 t0 = time.time()
 #print(using_set)
-
-def handler(signal_received, frame):
-    create_pass_list.append("Se Interrumpió la operación")
-    create_pass_list.append(count)
-    create_pass_list.append(currentPassComb)
-    t1 = time.time()
-    total = t1-t0
-    create_pass_list.append(total)
-    print(create_pass_list)
-    sys.exit(0)
-
-signal(SIGINT, handler)
-
 for subset in itertools.product(using_set,repeat=pass_length):
 	count += 1
 	currentPassComb = ''.join(subset)
+	#print(currentPassComb)
 	if list_options[3] != "":
 		if list_options[3] == md5_hex_hash(''.join(subset)):
 			t1 = time.time()
@@ -109,4 +106,5 @@ for subset in itertools.product(using_set,repeat=pass_length):
 		print ("ERROR")
 		#print(subset)
 print ("ERROR")
+
 sys.stdout.flush()
